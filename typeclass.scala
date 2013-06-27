@@ -12,7 +12,7 @@ object UserInfoMethods {
     def getUserInfo(user: T): UserInfo
   }
   object UserInfoLike {
-    implicit object UserInfoLikeBasic extends UserInfoLike[BasicUser] {
+    implicit val UserInfoLikeBasic = new UserInfoLike[BasicUser] {
       def getUserInfo(user: BasicUser): UserInfo = UserInfo(user.name, user.email)
     }
     implicit object UserInfoLikePaid extends UserInfoLike[PaidUser] {
