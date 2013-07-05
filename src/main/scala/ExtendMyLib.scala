@@ -1,3 +1,4 @@
+package com.rumblesan.scalaexperiments.extend
 
 
 case class UserInfo(name: String, email: String)
@@ -27,14 +28,4 @@ object BasicUser {
   implicit def BasicUser2Extended(user: BasicUser) = new BasicUserExtended(user)
 
 }
-
-
-val basic = BasicUser(1, "foo bar", "foo@bar.com")
-val paid = PaidUser(1, "baz bim", "baz@bim.com", 55.4)
-
-println(basic.userInfo)
-// UserInfo(foo bar,foo@bar.com)
-
-println(paid.userInfo)
-// UserInfo(baz bim,baz@bim.com)
 
