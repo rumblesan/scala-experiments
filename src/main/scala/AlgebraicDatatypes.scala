@@ -1,24 +1,25 @@
 package com.rumblesan.scalaexperiments.algebraic
 
+import scalaz._, Scalaz._
 
-sealed trait MyTree
-case object MyTreeEmpty extends MyTree
-case class MyTreeLeaf(data: String) extends MyTree
-case class MyTreeTree(data: String, left: MyTree, right: MyTree) extends MyTree
+sealed trait MyTree[+T]
+case class MyTreeEmpty[T: Order]() extends MyTree[T]
+case class MyTreeLeaf[T: Order](data: T) extends MyTree[T]
+case class MyTreeTree[T: Order](data: T, left: MyTree[T], right: MyTree[T]) extends MyTree[T]
 
 trait MyTreeOps {
 
-  def addData(data: String, kbucket: MyTree): MyTree = {
+  def addData[T: Order](data: T, kbucket: MyTree[T]): MyTree[T] = {
     kbucket match {
-      case MyTreeEmpty => MyTreeLeaf(data)
-      case leaf: MyTreeLeaf => {
-        if (data < leaf.data) MyTreeTree(leaf.data, MyTreeLeaf(data), MyTreeEmpty)
-        else if (data > leaf.data) MyTreeTree(leaf.data, MyTreeEmpty, MyTreeLeaf(data))
+      case MyTreeEmpty() => MyTreeLeaf[T](data)
+      case leaf: MyTreeLeaf[T] => {
+        if (data lt leaf.data) MyTreeTree(leaf.data, MyTreeLeaf[T](data), MyTreeEmpty[T])
+        else if (data gt leaf.data) MyTreeTree[T](leaf.data, MyTreeEmpty[T], MyTreeLeaf[T](data))
         else leaf
       }
-      case tree: MyTreeTree => {
-        if (data < tree.data) MyTreeTree(tree.data, addData(data, tree.left), tree.right)
-        else if (data > tree.data) MyTreeTree(tree.data, tree.left, addData(data, tree.right))
+      case tree: MyTreeTree[T] => {
+        if (data lt tree.data) MyTreeTree[T](tree.data, addData(data, tree.left), tree.right)
+        else if (data gt tree.data) MyTreeTree[T](tree.data, tree.left, addData(data, tree.right))
         else tree
       }
     }

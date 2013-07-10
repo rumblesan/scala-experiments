@@ -8,20 +8,20 @@ import com.rumblesan.scalaexperiments.algebraic._
 class AlgebraicDatatypesSpec extends Specification {
 
   "The 'Algebraic Datatype Example'" should {
-    "create a basic tree" in {
+    "create a basic tree of strings" in {
 
-      val tree = MyTree.addData("some data", MyTreeEmpty)
+      val tree = MyTree.addData("some data", MyTreeEmpty[String]())
 
-      tree must haveClass[MyTreeLeaf]
+      tree must haveClass[MyTreeLeaf[String]]
 
     }
     "create a more complex tree" in {
       val data = "this is my new data list".split(" ")
-      val tree = data.foldLeft(MyTreeEmpty: MyTree)((tree, data) =>
+      val tree = data.foldLeft(MyTreeEmpty[String](): MyTree[String])((tree, data) =>
         MyTree.addData(data, tree)
       )
 
-      tree must haveClass[MyTreeTree]
+      tree must haveClass[MyTreeTree[String]]
     }
   }
 }
