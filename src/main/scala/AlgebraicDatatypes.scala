@@ -6,7 +6,7 @@ case object MyTreeEmpty extends MyTree
 case class MyTreeLeaf(data: String) extends MyTree
 case class MyTreeTree(data: String, left: MyTree, right: MyTree) extends MyTree
 
-object MyTree {
+trait MyTreeOps {
 
   def addData(data: String, kbucket: MyTree): MyTree = {
     kbucket match {
@@ -25,4 +25,6 @@ object MyTree {
   }
 
 }
+
+object MyTree extends MyTreeOps
 
