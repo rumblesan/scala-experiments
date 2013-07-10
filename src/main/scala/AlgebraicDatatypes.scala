@@ -4,8 +4,8 @@ import scalaz._, Scalaz._
 
 sealed trait MyTree[+T]
 case object MyTreeEmpty extends MyTree[Nothing]
-case class MyTreeLeaf[T: Order](data: T) extends MyTree[T]
-case class MyTreeTree[T: Order](data: T, left: MyTree[T], right: MyTree[T]) extends MyTree[T]
+sealed case class MyTreeLeaf[T: Order](data: T) extends MyTree[T]
+sealed case class MyTreeTree[T: Order](data: T, left: MyTree[T], right: MyTree[T]) extends MyTree[T]
 
 trait MyTreeOps {
 
