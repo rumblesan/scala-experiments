@@ -2,6 +2,8 @@ package com.rumblesan.scalaexperiments.algebraic
 
 import scalaz._, Scalaz._
 
+import com.rumblesan.scalaexperiments.myfunctortree._
+
 sealed trait MyTree[+T]
 case object MyTreeEmpty extends MyTree[Nothing]
 sealed case class MyTreeLeaf[T](data: T) extends MyTree[T]
@@ -27,5 +29,5 @@ trait MyTreeOps {
 
 }
 
-object MyTree extends MyTreeOps
+object MyTree extends MyTreeOps with MyTreeFunctorOps
 

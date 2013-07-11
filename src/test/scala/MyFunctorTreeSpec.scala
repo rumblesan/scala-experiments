@@ -13,7 +13,7 @@ class MyFunctorTreeSpec extends Specification {
       val initialTree = List(1,4,6,9).foldLeft(MyTreeEmpty: MyTree[Integer])((tree, data) =>
         MyTree.addData(data, tree)
       )
-      val newTree = MyFunctorTreeOps.map(initialTree)((_ + 1))
+      val newTree = initialTree.map((_ + 1))
 
       val expectedTree = List(2,5,7,10).foldLeft(MyTreeEmpty: MyTree[Integer])((tree, data) =>
         MyTree.addData(data, tree)
