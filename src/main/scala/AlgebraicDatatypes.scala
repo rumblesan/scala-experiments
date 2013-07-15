@@ -29,5 +29,5 @@ trait MyTreeOps {
 
 }
 
-object MyTree extends MyTreeOps with MyTreeFunctorOps
+object MyTree extends MyTreeOps with MyTreeInstances
 
