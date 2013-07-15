@@ -9,6 +9,7 @@ case object MyTreeEmpty extends MyTree[Nothing]
 sealed case class MyTreeLeaf[T](data: T) extends MyTree[T]
 sealed case class MyTreeTree[T](data: T, left: MyTree[T], right: MyTree[T]) extends MyTree[T]
 
+
 trait MyTreeOps[T] extends Ops[MyTree[T]] {
 
   def addData[T: Order](data: T): MyTree[T] = {
@@ -29,6 +30,7 @@ trait MyTreeOps[T] extends Ops[MyTree[T]] {
 
 }
 
+
 trait ToMyTreeOps {
 
   implicit def ToMyTreeOps[T](v: MyTree[T]): MyTreeOps[T] = 
@@ -37,6 +39,15 @@ trait ToMyTreeOps {
     }
 
 }
+
+
+trait MyTreeInstances {
+
+  implicit val mytreeInstance = new MyTreeFunctor {
+  }
+
+}
+
 
 object MyTree extends ToMyTreeOps with MyTreeInstances
 
