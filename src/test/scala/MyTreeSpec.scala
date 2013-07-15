@@ -2,7 +2,7 @@ package com.rumblesan.scalaexperiments
 
 import org.specs2.mutable._
 
-import com.rumblesan.scalaexperiments.algebraic._
+import mytree._
 
 
 class AlgebraicDatatypesSpec extends Specification {

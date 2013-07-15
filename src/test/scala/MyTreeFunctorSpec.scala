@@ -4,7 +4,7 @@ import org.specs2.mutable._
 
 import scalaz._, Scalaz._
 
-import com.rumblesan.scalaexperiments.algebraic._
+import mytree._
 
 
 class MyFunctorTreeSpec extends Specification {

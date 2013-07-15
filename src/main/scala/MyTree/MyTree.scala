@@ -1,9 +1,8 @@
-package com.rumblesan.scalaexperiments.algebraic
+package com.rumblesan.scalaexperiments.mytree
 
 import scalaz._, Scalaz._
 import scalaz.syntax.Ops
 
-import com.rumblesan.scalaexperiments.myfunctortree._
 
 sealed trait MyTree[+T]
 case object MyTreeEmpty extends MyTree[Nothing]

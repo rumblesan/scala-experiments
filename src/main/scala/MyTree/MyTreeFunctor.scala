@@ -1,8 +1,6 @@
-package com.rumblesan.scalaexperiments.myfunctortree
+package com.rumblesan.scalaexperiments.mytree
 
 import scalaz.Functor
-
-import com.rumblesan.scalaexperiments.algebraic._
 
 
 trait MyTreeInstances {
