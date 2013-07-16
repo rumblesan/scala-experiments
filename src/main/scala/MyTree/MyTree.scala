@@ -40,8 +40,13 @@ trait ToMyTreeOps {
 
 }
 
+trait MyTreeInstances0 {
+  implicit def listEqual[A](implicit A0: Equal[A]) = new MyTreeEqual[A] {
+    implicit def A = A0
+  }
+}
 
-trait MyTreeInstances {
+trait MyTreeInstances extends MyTreeInstances0 {
 
   implicit val mytreeInstance = new MyTreeFunctor {
   }
