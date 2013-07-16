@@ -5,7 +5,7 @@ import org.specs2.mutable._
 import mytree._
 
 
-class AlgebraicDatatypesSpec extends Specification {
+class MyTreeSpec extends Specification {
 
   "The 'Algebraic Datatype Example'" should {
     "create a basic tree of strings" in {

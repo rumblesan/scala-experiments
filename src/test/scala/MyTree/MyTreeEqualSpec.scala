@@ -2,11 +2,9 @@ package com.rumblesan.scalaexperiments
 
 import org.specs2.mutable._
 
-import scalaz._
-import Scalaz._
+import scalaz._, Scalaz._
 
 import mytree._
-import MyTree._
 
 
 class MyTreeEqualSpec extends Specification {

@@ -7,7 +7,7 @@ import scalaz._, Scalaz._
 import mytree._
 
 
-class MyFunctorTreeSpec extends Specification {
+class MyTreeFunctorSpec extends Specification {
 
   "The MyFunctorTree Example" should {
     "map a function over a tree" in {
