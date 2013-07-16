@@ -10,7 +10,8 @@ class MyTreeSpec extends Specification {
   "The 'Algebraic Datatype Example'" should {
     "create a basic tree of strings" in {
 
-      val tree = MyTreeEmpty.addData("some data")
+      val emptyTree: MyTree[String] = MyTreeEmpty
+      val tree = emptyTree.addData("some data")
 
       tree must haveClass[MyTreeLeaf[String]]
 
@@ -25,7 +26,8 @@ class MyTreeSpec extends Specification {
     }
     "create a basic tree of integers" in {
 
-      val tree = MyTreeEmpty.addData(4)
+      val emptyTree: MyTree[String] = MyTreeEmpty
+      val tree = emptyTree.addData(4)
 
       tree must haveClass[MyTreeLeaf[Int]]
 
@@ -40,7 +42,8 @@ class MyTreeSpec extends Specification {
     }
     "create a basic tree of doubles" in {
 
-      val tree = MyTreeEmpty.addData(4.0)
+      val emptyTree: MyTree[String] = MyTreeEmpty
+      val tree = emptyTree.addData(4.0)
 
       tree must haveClass[MyTreeLeaf[Double]]
 
