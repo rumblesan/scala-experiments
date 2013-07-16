@@ -6,7 +6,9 @@ trait MyTreeEqual[A] extends Equal[MyTree[A]] {
 
   implicit def A: Equal[A]
 
-  def equal(t1: MyTree[A], t2: MyTree[A]): Boolean = {
+  override def equalIsNatural: Boolean = A.equalIsNatural
+
+  override def equal(t1: MyTree[A], t2: MyTree[A]): Boolean = {
     (t1, t2) match {
       case (MyTreeEmpty, MyTreeEmpty) => true
       case (MyTreeLeaf(data1), MyTreeLeaf(data2)) => A.equal(data1, data2)
