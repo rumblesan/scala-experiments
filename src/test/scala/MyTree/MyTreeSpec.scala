@@ -1,8 +1,8 @@
-package com.rumblesan.scalaexperiments
+package com.rumblesan.scalaexperiments.tests.mytree
 
 import org.specs2.mutable._
 
-import mytree._
+import com.rumblesan.scalaexperiments.mytree._
 
 
 class MyTreeSpec extends Specification {

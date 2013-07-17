@@ -1,10 +1,10 @@
-package com.rumblesan.scalaexperiments
+package com.rumblesan.scalaexperiments.tests.mytree
 
 import org.specs2.mutable._
 
 import scalaz._, Scalaz._
 
-import mytree._
+import com.rumblesan.scalaexperiments.mytree._
 
 
 class MyTreeEqualSpec extends Specification {

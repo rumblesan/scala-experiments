@@ -1,4 +1,4 @@
-package com.rumblesan.scalaexperiments
+package com.rumblesan.scalaexperiments.tests.extend
 
 import org.specs2.mutable._
 
