@@ -64,5 +64,18 @@ class MyValidationStuffSpec extends Specification {
       validated must_==(4.right[String])
 
     }
+    "correctly error with for comprehensions" in {
+
+      val errord = for {
+        isEven <- MyValidationStuff.likesEven(0)
+        isMultiplied = MyValidationStuff.justTimes2(isEven)
+        isNotZero <- MyValidationStuff.likesNonZero(isMultiplied)
+      } yield isNotZero
+
+      errord.isLeft must beTrue
+      
+      errord.swap.getOrElse("") must_==("i hate zeros")
+
+    }
   }
 }
