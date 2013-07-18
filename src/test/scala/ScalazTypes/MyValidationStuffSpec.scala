@@ -1,10 +1,10 @@
-package com.rumblesan.scalaexperiments.tests.validationtest
+package com.rumblesan.scalaexperiments.tests.scalaztypes.validation
 
 import scalaz._, Scalaz._
 
 import org.specs2.mutable._
 
-import com.rumblesan.scalaexperiments.scalaz.validation._
+import com.rumblesan.scalaexperiments.scalaztypes.validation._
 
 
 class MyValidationStuffSpec extends Specification {

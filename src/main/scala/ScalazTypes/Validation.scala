@@ -1,4 +1,4 @@
-package com.rumblesan.scalaexperiments.scalaz.validation
+package com.rumblesan.scalaexperiments.scalaztypes.validation
 
 import scalaz._, Scalaz._
 
