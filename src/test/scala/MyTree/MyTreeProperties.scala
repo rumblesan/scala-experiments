@@ -1,7 +1,11 @@
 package com.rumblesan.scalaexperiments.tests.mytree
 
-import org.specs2._
-import org.scalacheck._
+import org.specs2.mutable.Specification
+import org.specs2.ScalaCheck
+import org.scalacheck.{Arbitrary, Gen, Prop}
+
+import Arbitrary.arbitrary
+import Prop.forAll
 
 import scalaz._, Scalaz._
 
@@ -10,39 +14,37 @@ import com.rumblesan.scalaexperiments.mytree._
 
 class MyTreeProperties extends Specification with ScalaCheck {
   
-  def is = s2"""
-    Properties for MyTree
-      follows the identity law     $identityLaw
-      follows the composition law  $compositionLaw
-                                   """
+  "Properties for MyTree" should {
 
+    "follows the identity law" in {
 
-  def identityLaw = check { (numbers: List[Int]) =>
+      forAll(genMyTreeInt) { (tree: MyTree[Int]) =>
 
-    val tree1: MyTree[Int] = numbers.foldLeft(MyTreeEmpty: MyTree[Int])(
-      (tree, number) =>
-        tree.addData(number)
-    )
+        tree must_== tree.map(identity)
 
-    tree1 must_== tree1.map(identity)
+      }
 
-  }
+    }
 
-  def compositionLaw = check { (numbers: List[Int]) =>
+    "follows the composition law" in {
 
-    val tree: MyTree[Int] = numbers.foldLeft(MyTreeEmpty: MyTree[Int])(
-      (tree, number) =>
-        tree.addData(number)
-    )
+      forAll(genMyTreeInt) { (tree: MyTree[Int]) =>
 
-    val numToStr = (n: Int) => n.toString
+        val numToStr = (n: Int) => n.toString
 
-    val strLen = (s: String) => s.length
+        val strLen = (s: String) => s.length
 
-    val composed = strLen compose numToStr
+        val composed = strLen compose numToStr
 
-    tree.map(numToStr).map(strLen) must_== tree.map(composed)
+        tree.map(numToStr).map(strLen) must_== tree.map(composed)
+      }
+
+    }
 
   }
+
+  lazy val genMyTreeInt: Gen[MyTree[Int]] = for {
+    numbers <- arbitrary[List[Int]]
+  } yield numbers.foldLeft(MyTreeEmpty: MyTree[Int])((t, n) => t.addData(n))
 
 }
