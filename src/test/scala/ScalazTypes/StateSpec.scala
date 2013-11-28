@@ -5,20 +5,22 @@ import scalaz._, Scalaz._
 import org.specs2.mutable._
 
 import com.rumblesan.scalaexperiments.scalaztypes.state._
-import StateExample.{Double, Triple, AddOne}
 
 class StateSpec extends Specification {
 
   "The State functions" should {
-    "work like I'm expecting in a for comprehension" in {
+
+    "work like I'm expecting in a for comprehension for the simple example" in {
+
+      import SimpleStateExample._
 
       val plan = List(Double, AddOne, Double, Double, AddOne)
 
       def runPlan(input: Int) = for {
-        a <- StateExample.run(input)
-        b <- StateExample.run(a)
-        _ <- StateExample.add(Triple)
-        c <- StateExample.run(b)
+        a <- run(input)
+        b <- run(a)
+        _ <- add(Triple)
+        c <- run(b)
       } yield c
 
 
@@ -31,6 +33,33 @@ class StateSpec extends Specification {
       remainder must_==(List(Double, Double, AddOne))
 
     }
+
+    "work for the scope example" in {
+
+      import ScopeStateExample._
+
+      val global = Global(Map("a" -> 1))
+      val scope1 = Limited(Map("b" -> 2), global)
+
+      def runScopes = for {
+        _ <- newScope(Map("c" -> 3))
+        a <- getValue("a")
+        b <- getValue("b")
+        c <- getValue("c")
+        _ <- leaveScope
+        _ <- leaveScope
+        d <- getValue("a")
+      } yield a + b + c + d
+
+      val output = runScopes(scope1)
+
+      val finalState = output._1
+      val finalValue = output._2
+
+      finalValue must_==(7)
+      finalState must_==(global)
+    }
+
   }
 
 }
