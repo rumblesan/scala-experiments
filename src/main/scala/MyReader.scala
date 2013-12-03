@@ -2,11 +2,11 @@ package com.rumblesan.scalaexperiments.myreader
 
 import scalaz._, Scalaz._
 
-object MyReaderT {
+object MyReader {
 
-  type MyReaderT[A,B] = A => B
+  type MyReader[A,B] = A => B
 
-  def point[A,B](value: B): MyReaderT[A,B] = _ => value
+  def point[A,B](value: B): MyReader[A,B] = _ => value
 
 }
 
