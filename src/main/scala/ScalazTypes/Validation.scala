@@ -3,7 +3,7 @@ package com.rumblesan.scalaexperiments.scalaztypes.validation
 import scalaz._, Scalaz._
 
 
-object MyValidationStuff {
+object ScalazValidationExample {
 
 
   def likesEven(value: Int): \/[String, Int] = {

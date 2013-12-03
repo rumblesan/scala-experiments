@@ -15,9 +15,9 @@ class ReaderSpec extends Specification {
       val config = Config(4)
 
       val reader = for {
-        res1 <- ScalazReaderStuff.addFive
-        res2 <- ScalazReaderStuff.addConfNumber(res1)
-        res3 <- ScalazReaderStuff.addConfNumber(res2)
+        res1 <- ScalazReaderExample.addFive
+        res2 <- ScalazReaderExample.addConfNumber(res1)
+        res3 <- ScalazReaderExample.addConfNumber(res2)
       } yield res3
 
       reader(config) must_==(17)

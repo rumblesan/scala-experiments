@@ -4,7 +4,7 @@ import scalaz._, Scalaz._
 
 case class Config(number: Int)
 
-object ScalazReaderStuff {
+object ScalazReaderExample {
 
   def addConfNumber(value: Int): Reader[Config,Int] = Reader{
     config => value + config.number

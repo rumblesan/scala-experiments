@@ -15,9 +15,9 @@ class WriterSpec extends Specification {
       val input = 4
 
       val writer = (for {
-        a <- ScalazWriterStuff.double(input)
-        b <- ScalazWriterStuff.triple(a)
-        c <- ScalazWriterStuff.addOne(b)
+        a <- ScalazWriterExample.double(input)
+        b <- ScalazWriterExample.triple(a)
+        c <- ScalazWriterExample.addOne(b)
       } yield c).run
 
       val instructions = writer._1

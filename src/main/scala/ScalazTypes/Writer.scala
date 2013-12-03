@@ -7,7 +7,7 @@ case object Double extends Instruction
 case object Triple extends Instruction
 case object AddOne extends Instruction
 
-object ScalazWriterStuff {
+object ScalazWriterExample {
 
   def double(value: Int): Writer[List[Instruction], Int] = (value * 2).set(List(Double))
 
