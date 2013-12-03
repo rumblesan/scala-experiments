@@ -30,6 +30,14 @@ trait MyTreeOps[A] extends Ops[MyTree[A]] {
     }
   }
 
+
+  def isEmpty[A]: Boolean = {
+    self match {
+      case MyTreeEmpty => true
+      case _ => false
+    }
+  }
+
 }
 
 

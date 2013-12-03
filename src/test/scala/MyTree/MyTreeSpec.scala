@@ -56,5 +56,19 @@ class MyTreeSpec extends Specification {
 
       tree must haveClass[MyTreeTree[Double]]
     }
+    "work with empty correctly" in {
+
+      val emptyTree: MyTree[String] = MyTreeEmpty
+      val tree = emptyTree.addData("some data")
+
+      val data = "this is my new data list".split(" ")
+      val bigtree = data.foldLeft(MyTreeEmpty: MyTree[String])((tree, data) =>
+        tree.addData(data)
+      )
+
+      emptyTree.isEmpty must beTrue
+      tree.isEmpty must beFalse
+      bigtree.isEmpty must beFalse
+    }
   }
 }
