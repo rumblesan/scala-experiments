@@ -41,23 +41,26 @@ object ScopeStateExample {
   class VariableNotDefined(msg: String) extends RuntimeException(msg)
   class ExitingGlobalScope(msg: String) extends RuntimeException(msg)
 
-  def getValue(name: String) = State[Scope, Int] { case scope =>
+  def getValue(name: String): State[Scope, Int] = State[Scope, Int] { case scope =>
 
-    def searchScopes(sc: Scope): Int = {
-      sc match {
+      scope match {
 
-        case Global(values) => values.get(name).getOrElse(
-          throw new VariableNotDefined(s"Could not find variable: $name")
+        case Global(values) => (
+          scope,
+          values.get(name).getOrElse(
+            throw new VariableNotDefined(s"Could not find variable: $name")
+          )
         )
 
         case Limited(values, parent) => {
-          values.get(name).getOrElse(searchScopes(parent))
+          values.get(name).map(
+            v => (scope, v)
+          ).getOrElse(
+            (scope, getValue(name)(parent)._2)
+          )
         }
 
       }
-    }
-
-    (scope, searchScopes(scope))
 
   }
 
