@@ -30,6 +30,16 @@ trait MyTreeOps[A] extends Ops[MyTree[A]] {
     }
   }
 
+  def headOption[A: Order]: Option[A] = {
+    self match {
+      case MyTreeEmpty => None
+      case leaf: MyTreeLeaf[A] => Some(leaf.data)
+      case tree: MyTreeTree[A] => {
+        if (tree.right.isEmpty) Some(tree.data)
+        else tree.right.headOption
+      }
+    }
+  }
 
   def isEmpty[A]: Boolean = {
     self match {
