@@ -24,10 +24,10 @@ class StateSpec extends Specification {
       } yield c
 
 
-      val outputState = runPlan(5)(plan)
+      val outputState = runPlan(5)
 
-      val remainder = outputState._1
-      val output = outputState._2
+      val remainder = outputState.exec(plan)
+      val output = outputState.eval(plan)
 
       output must_==(33)
       remainder must_==(List(Double, Double, AddOne))
@@ -51,10 +51,8 @@ class StateSpec extends Specification {
         d <- getValue("a")
       } yield a + b + c + d
 
-      val output = runScopes(scope1)
-
-      val finalState = output._1
-      val finalValue = output._2
+      val finalState = runScopes.exec(scope1)
+      val finalValue = runScopes.eval(scope1)
 
       finalValue must_==(7)
       finalState must_==(global)
