@@ -27,9 +27,10 @@ class RWSTSpec extends Specification {
         o <- getTopTwoStateValueSum()
       } yield o
 
-      val Need(logs, result, finalstate) = rwstExample.run((config, state))
+      val result = rwstExample.run(config, state)
 
-      result must_==(37)
+      result._3 must_==(List(1, 3, 4))
+      result._2 must_==(42)
 
     }
   }
