@@ -1,10 +1,9 @@
-package com.rumblesan.scalaexperiments.scalaztypes.validation
+package com.rumblesan.scalaexperiments.scalaztypes.disjunction
 
 import scalaz._, Scalaz._
 
 
-object ScalazValidationExample {
-
+object ScalazDisjunctionExample {
 
   def likesEven(value: Int): \/[String, Int] = {
     if (value % 2 == 0) value.right[String]
