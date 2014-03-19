@@ -47,7 +47,9 @@ class ForComprehensionSpec extends Specification {
         maybeValue(i).flatMap( v1 =>
           maybeMult(v1, 3).flatMap( v2 => {
             val v3 = v2 + 1
-            maybePlus(v2, v3).map(v4 => v4 + 1)
+            maybePlus(v2, v3).map(v4 =>
+              v4 + 1
+            )
           })
         )
       )
@@ -89,7 +91,9 @@ class ForComprehensionSpec extends Specification {
         oneUpAndDown(v1).map(v2 => {
           val v3 = doubleIt(v2)
           v3
-        }).map(v3 => 0 :: v3)
+        }).map(v3 =>
+          0 :: v3
+        )
 
       )
 
