@@ -21,6 +21,28 @@ class ForComprehensionSpec extends Specification {
         v4 <- maybePlus(v2, v3)
       } yield v4 + 1
 
+      /*
+
+      The below is exactly what the above will desugar into
+      scala -Xprint:parser
+      is useful for seeing it if you want
+
+      val forResult: Option[Int] = input.flatMap(((i) =>
+        maybeValue(i).flatMap(((v1) =>
+          maybeMult(v1, 3).map(((v2) => {
+            val v3 = v2.$plus(1);
+            scala.Tuple2(v2, v3)
+          })).flatMap(((x$1) =>
+            x$1: @scala.unchecked match {
+              case scala.Tuple2((v2 @ _), (v3 @ _)) =>
+                maybePlus(v2, v3).map(((v4) =>
+                  v4.$plus(1)))
+            }
+          ))
+        ))
+      ))
+      */
+
       val mapResult: Option[Int] = input.flatMap( i =>
         maybeValue(i).flatMap( v1 =>
           maybeMult(v1, 3).flatMap( v2 => {
@@ -30,6 +52,22 @@ class ForComprehensionSpec extends Specification {
         )
       )
 
+      val desugaredResult: Option[Int] = input.flatMap(((i) =>
+        maybeValue(i).flatMap(((v1) =>
+          maybeMult(v1, 3).map(((v2) => {
+            val v3 = v2.$plus(1);
+            scala.Tuple2(v2, v3)
+          })).flatMap(((x$1) =>
+            x$1 match {
+              case scala.Tuple2((v2 @ _), (v3 @ _)) =>
+                maybePlus(v2, v3).map(((v4) =>
+                  v4.$plus(1)))
+            }
+          ))
+        ))
+      ))
+
+      desugaredResult must_==(Some(14))
       forResult must_==(Some(14))
       mapResult must_==(Some(14))
 
