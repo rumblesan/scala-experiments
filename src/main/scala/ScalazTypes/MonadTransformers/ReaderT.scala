@@ -8,11 +8,11 @@ object ScalazReaderTOptionExample {
 
   case class Config(value: Int)
 
-  def addValue(input: Int):ReaderTO[Config, Int] = kleisli[Option, Config, Int]{c =>
+  def addValue(input: Int):ReaderTO[Config, Int] = kleisli{c =>
     Some(c.value + input)
   }
 
-  def addValueIfEven(input: Int): ReaderTO[Config, Int] = kleisli[Option, Config, Int]{c =>
+  def addValueIfEven(input: Int): ReaderTO[Config, Int] = kleisli{c =>
     if ((input % 2) == 0) Some(c.value + input)
     else None
   }
