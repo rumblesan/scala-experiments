@@ -99,6 +99,32 @@ object GameOfLifeSpec extends Specification {
       board must_== expected
     }
 
+    "change the state of the board in an immutable fashion" in {
+
+      val boardStateChange = for {
+        _ <- Board.setCellState(0, 1, 1)
+        _ <- Board.setCellState(0, 2, 1)
+        _ <- Board.setCellState(1, 1, 1)
+        _ <- Board.setCellState(1, 2, 1)
+        _ <- Board.setCellState(2, 2, 1)
+        _ <- Game.runSimulationTurn
+        _ <- Game.runSimulationTurn
+        _ <- Game.runSimulationTurn
+      } yield ()
+
+      val initialBoard = Board(4, 4)
+      val finalBoard = boardStateChange.exec(initialBoard)
+      val expectedInitialBoard = Board(4, 4)
+      val expectedFinalBoard= Board(
+        Vector(Vector(1, 1, 1, 0), Vector(0, 1, 1, 1), Vector(0, 1, 0, 0), Vector(0, 0, 0, 0)),
+        4,
+        4
+      )
+
+      initialBoard must_== expectedInitialBoard
+      finalBoard must_== expectedFinalBoard
+    }
+
   }
 
 }
