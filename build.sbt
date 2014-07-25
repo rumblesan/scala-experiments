@@ -4,10 +4,10 @@ organization := "com.rumblesan"
 
 version := "0.1.0"
 
-scalaVersion := "2.10.2"
+scalaVersion := "2.11.2"
 
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2" % "2.3.3" % "test",
+  "org.specs2" %% "specs2" % "2.3.13" % "test",
   "org.scalaz" %% "scalaz-core" % "7.0.6",
   "org.scalaz" %% "scalaz-effect" % "7.0.6",
   "org.scalaz" %% "scalaz-typelevel" % "7.0.6",
